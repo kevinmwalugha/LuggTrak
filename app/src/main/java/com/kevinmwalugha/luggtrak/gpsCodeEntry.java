@@ -1,17 +1,30 @@
 package com.kevinmwalugha.luggtrak;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
-public class gpsCodeEntry extends ActionBarActivity {
+public class gpsCodeEntry extends AppCompatActivity implements View.OnClickListener {
+    private Button btnTrack;
+    private EditText gpsCodeEntry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps_code_entry);
+
+        btnTrack=(Button)findViewById(R.id.btn_track);
+        btnTrack.setOnClickListener(this);
+        gpsCodeEntry=(EditText)findViewById(R.id.editText);
+
     }
 
     @Override
@@ -34,5 +47,17 @@ public class gpsCodeEntry extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (gpsCodeEntry.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(),"Please provide a code",Toast.LENGTH_LONG).show();
+        }else{
+//           startActivity(new Intent(getApplicationContext(),luggagePosition.class));
+            Intent position=new Intent(getApplicationContext(),pPosition.class);
+            startActivity(position);
+        }
+
     }
 }

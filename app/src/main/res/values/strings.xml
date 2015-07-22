@@ -18,4 +18,5 @@
     <string name="title_activity_about">aboutActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_p_position">pPosition</string>
 </resources>
