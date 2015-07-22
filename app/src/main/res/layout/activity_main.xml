@@ -1,0 +1,92 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Username"
+        android:ems="10"
+        android:id="@+id/userName"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <EditText
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:ems="10"
+        android:id="@+id/passWord"
+        android:layout_below="@+id/userName"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+         />
+
+    <Button
+        android:layout_width="150sp"
+        android:textSize="@dimen/button"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_login"
+        android:id="@+id/button"
+        android:layout_below="@+id/passWord"
+        android:paddingTop="@dimen/common_btn_padding"
+        android:layout_centerHorizontal="true"
+         />
+
+    <ImageView
+        android:src="@mipmap/logo2"
+        android:layout_width="@dimen/logoWidth"
+        android:layout_height="@dimen/logoHeight"
+        android:id="@+id/logo"
+        android:layout_above="@+id/userName"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't have an account?"
+        android:id="@+id/signup"
+        android:paddingTop="@dimen/common_btn_padding"
+        android:paddingLeft="@dimen/paddingLeft"
+        android:paddingRight="@dimen/common_padding"
+        android:textSize="@dimen/medium_text_size"
+        android:layout_below="@+id/button"
+       />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signup2"
+        android:id="@+id/signup1"
+        android:paddingTop="@dimen/common_btn_padding"
+        android:paddingRight="@dimen/common_padding"
+        android:textSize="@dimen/medium_text_size"
+        android:layout_below="@+id/button"
+        android:layout_toRightOf="@+id/signup"
+        android:clickable="true"
+        android:textColor="@color/darkblue"
+         />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signup3"
+        android:id="@+id/signup2"
+        android:paddingTop="@dimen/common_btn_padding"
+        android:paddingRight="@dimen/common_txt_padding"
+        android:textSize="@dimen/medium_text_size"
+        android:layout_below="@+id/button"
+        android:layout_toRightOf="@+id/signup1"
+        />
+
+
+</RelativeLayout>

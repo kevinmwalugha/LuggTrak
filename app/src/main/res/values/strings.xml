@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Lugg Trak</string>
+
+    <string name="btn_login">Login</string>
+    <string name="btn_track">Track Package</string>
+    <string name="action_settings">Settings</string>
+    <!--<<string name="question">Don't have an account?</string>
+    string name="signup">Don't have an account?</string>-->
+    <string name="signup2">Sign Up</string>
+    <string name="signup3">for free</string>
+    <string name="title_activity_gps_code_entry">GPS Code Entry</string>
+
+    <string name="enter">Enter the GPS Code as provided to you by the attendant to track your package now.</string>
+    <string name="disclaimer1">(This process might take a few minutes to map the co-ordinates)</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_about">aboutActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+</resources>
