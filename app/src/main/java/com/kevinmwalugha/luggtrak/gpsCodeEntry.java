@@ -55,7 +55,7 @@ public class gpsCodeEntry extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(getApplicationContext(),"Please provide a code",Toast.LENGTH_LONG).show();
         }else{
 //           startActivity(new Intent(getApplicationContext(),luggagePosition.class));
-            Intent position=new Intent(getApplicationContext(),pPosition.class);
+            Intent position=new Intent(getApplicationContext(),packageMapper.class);
             startActivity(position);
         }
 

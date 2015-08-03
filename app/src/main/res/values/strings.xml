@@ -19,4 +19,5 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_p_position">pPosition</string>
+    <string name="title_activity_package_mapper">packageMapper</string>
 </resources>

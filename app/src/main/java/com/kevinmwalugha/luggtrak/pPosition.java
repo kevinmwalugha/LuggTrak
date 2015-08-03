@@ -9,6 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -17,19 +22,40 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-public class pPosition extends FragmentActivity implements LocationListener{
+public class pPosition extends FragmentActivity implements LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
     private double lat,lng;
     private Location packageLocation;
     private LatLng MY_LOCATION=null;
     private GoogleMap map;
+
+    private GoogleApiClient mGoogleApiClient;
+
+    private LocationRequest mLocationRequest;
+    private static int REQUEST_CODE_RECOVER_PLAY_SERVICES = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_p_position);
 
-        lat=packageLocation.getLatitude();
-        lng=packageLocation.getLongitude();
+
+
+
+        /**
+         * We need Google Play Services, and therefore we have to check if it is present first?
+         */
+        if (checkGooglePlayServices()) {
+            buildGoogleApiClient();
+
+            //prepare connection request
+            createLocationRequest();
+        }
+
+
+        //packageLocation = LocationServices.FusedLocationApi.getLastLocation()
+
+        //lat=packageLocation.getLatitude();
+        //lng=packageLocation.getLongitude();
 
         MY_LOCATION=new LatLng(lat,lng);
 
@@ -53,6 +79,46 @@ public class pPosition extends FragmentActivity implements LocationListener{
             }
         });
 
+    }
+
+
+    /**
+     * Create the connection
+     */
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+
+    }
+
+    protected void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(20000);//provide update after every 20 seconds
+        mLocationRequest.setFastestInterval(5000);// provide update if there is an update after 5 seconds also
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    private boolean checkGooglePlayServices() {
+        int checkGooglePlayServices = GooglePlayServicesUtil
+                .isGooglePlayServicesAvailable(getApplicationContext());
+        if (checkGooglePlayServices != ConnectionResult.SUCCESS) {
+        /*
+		* Google Play Services is missing or update is required
+		*  return code could be
+		* SUCCESS,
+		* SERVICE_MISSING, SERVICE_VERSION_UPDATE_REQUIRED,
+		* SERVICE_DISABLED, SERVICE_INVALID.
+		*/
+            GooglePlayServicesUtil.getErrorDialog(checkGooglePlayServices,
+                    this, REQUEST_CODE_RECOVER_PLAY_SERVICES).show();
+
+            return false;
+        }
+
+        return true;
     }
 
     @Override
@@ -94,6 +160,32 @@ public class pPosition extends FragmentActivity implements LocationListener{
 
     @Override
     public void onProviderDisabled(String provider) {
+
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+
+        packageLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (packageLocation != null) {
+            lat=packageLocation.getLatitude();
+            lng=packageLocation.getLongitude();
+
+//            Toast.makeText(this, "Latitude:" + packageLocation.getLatitude() + ", Longitude:" + mLastLocation.getLongitude(), Toast.LENGTH_LONG).show();
+//
+//            showAddress(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        }
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
 
     }
 }
